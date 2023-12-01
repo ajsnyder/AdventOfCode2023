@@ -80,10 +80,20 @@ function Day1Puzzle2()  {
     //          These word numbers must be accounted for when determining first and last digit value in each string
 
     // 1)  Find and convert all values stated as words to their numerical form.
+    var wordvalues = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    var numvalues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    //var textFinderNine = sheetDataInput.createTextFinder('nine');
-    //textFinderNine.replaceAllWith('9');
-    word_values_to_numbers('nine', '9');
+    for (var i = 9; i <= wordvalues.length; i++) {
+        var wordvalue = wordvalues[i-1];
+        var numvalue = numvalues[i-1];
+
+        Logger.log(wordvalue);
+        Logger.log(numvalue);
+    
+        word_values_to_numbers(wordvalue, numvalue);
+    }
+
+    //word_values_to_numbers('nine', '9');
 
     // 2) Find number of rows of input data
 
