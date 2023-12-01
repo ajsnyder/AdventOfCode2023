@@ -6,7 +6,14 @@ var sheetD1P1 = ss.getSheetByName('D1P1');
 var sheetD1P2 = ss.getSheetByName('D1P2');
 
 function Day1SolveAll () {
-    SetupWorksheets();
+    SetupWorksheets('Input');
+    SetupWorksheets('D1P1');
+    SetupWorksheets('D1P2');
+
+    sheetDataInput = ss.getSheetByName('Input');
+    sheetD1P1 = ss.getSheetByName('D1P1');
+    sheetD1P2 = ss.getSheetByName('D1P2');
+
     Day1Puzzle1();
     Day1Puzzle2();
 };
@@ -20,50 +27,40 @@ function Day1Puzzle1() {
     //          Tens digit of calibration value is the first digit value found in string
     //          Ones digit of calibration value is the last digit value found in string
 
-    // 1) Find number of rows of input data
+    // 0) Import data into Google Sheet
+    convert_txt_gsheets('AoC2023_D1P1.txt', 'Input');
 
+    // 1) Find number of rows of input data
     var rangeInputData = sheetDataInput.getDataRange();
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    //Logger.log(valueNumberInputRows);
 
     // 2)  Find the calibration value in each row of input data and add to grand total calibration value
-
     var totalCalibrationValues = 0;                                              // Reset running total
-    //Logger.log(totalCalibrationValues);
 
     for (var i = 1; i <= valueNumberInputRows; i++) {
     //for (var i = 1; i <= 5; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
-        //Logger.log(currentRow);
 
         // 2a)  Find the tens digit
         var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
         var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
-        //Logger.log(FirstDigit);
 
         // 2b)  Find the ones digit
         var regExpLastDigit = new RegExp('.*([0-9]{1})', 'gmi');
         var LastDigit = regExpLastDigit.exec(currentRow)[1];
-        //Logger.log(LastDigit);
 
         // 2c)  Create calibration value
         FirstDigit = parseInt(FirstDigit);
         LastDigit = parseInt(LastDigit);
-        
         var rowCalibrationValue = 10 * FirstDigit + LastDigit
-        //Logger.log(rowCalibrationValue);
 
         // 2d)  Add row-level calibration value to grand total of all calibration values
-
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
-        //Logger.log(totalCalibrationValues);
-
     }
 
     // 3)  Output sum of all calibration vales to solution sheet
-
     sheetD1P1.getRange('B2').setValue('Answer:');
     sheetD1P1.getRange('C2').setValue(totalCalibrationValues);
 };
@@ -103,7 +100,6 @@ function Day1Puzzle2()  {
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    //Logger.log(valueNumberInputRows);
 
     // 2)  Find the calibration value in each row of input data for TENS DIGIT ONLY and add to grand total calibration value
     for (var i = 1; i <= valueNumberInputRows; i++) {
@@ -113,26 +109,15 @@ function Day1Puzzle2()  {
         // 2a)  Find the tens digit
         var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
         var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
-        //Logger.log(FirstDigit);
-
-        // 3b)  Find the ones digit
-        //var regExpLastDigit = new RegExp('.*([0-9]{1})', 'gmi');
-        //var LastDigit = regExpLastDigit.exec(currentRow)[1];
-        //Logger.log(LastDigit);
 
         // 2b)  Create calibration value
         FirstDigit = parseInt(FirstDigit);
         LastDigit = 0;
-        
         var rowCalibrationValue = 10 * FirstDigit + LastDigit;
-        //Logger.log(rowCalibrationValue);
 
         // 2c)  Add row-level calibration value to grand total of all calibration values
-
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
         Logger.log(currentRow + " | " + FirstDigit + " | " + LastDigit + " | " + totalCalibrationValues);
-
-        //Logger.log(totalCalibrationValues);
     }
 
     // 3)  Calculate last digit contribution to calibration total
@@ -156,48 +141,34 @@ function Day1Puzzle2()  {
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    //Logger.log(valueNumberInputRows);
 
     // 4)  Find the calibration value in each row of input data for ONES DIGIT ONLY and add to grand total calibration value
     for (var i = 1; i <= valueNumberInputRows; i++) {
     //for (var i = 1; i <= 10; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
 
-        // 4a)  Find the tens digit
-        //var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
-        //var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
-        //Logger.log(FirstDigit);
-
         // 4a)  Find the ones digit
         var regExpLastDigit = new RegExp('.*([0-9]{1})', 'gmi');
         var LastDigit = regExpLastDigit.exec(currentRow)[1];
-        //Logger.log(LastDigit);
 
         // 4b)  Create calibration value
         FirstDigit = 0;
         LastDigit = parseInt(LastDigit);
-        
         var rowCalibrationValue = 10 * FirstDigit + LastDigit;
-        //Logger.log(rowCalibrationValue);
 
         // 4c)  Add row-level calibration value to grand total of all calibration values
-
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
         Logger.log(currentRow + " | " + FirstDigit + " | " + LastDigit + " | " + totalCalibrationValues);
-
-        //Logger.log(totalCalibrationValues);
     }
 
-
     // 5)  Output sum of all calibration vales to solution sheet
-
     sheetD1P2.getRange('C2').setValue('Answer:');
     sheetD1P2.getRange('D2').setValue(totalCalibrationValues);
-
 };
 
-/*  Setup Worksheets */
-function SetupWorksheets() {
+/* Helper Functions */
+// Setup Worksheets
+function SetupWorksheets(sheetname) {
 
     /* Setup Google Sheets document with clean worksheets */
 
@@ -209,38 +180,17 @@ function SetupWorksheets() {
     sheetDummy = ss.getSheetByName('Dummy');
 
     // Clear and initialize the data input worksheet
-    if (sheetDataInput) {
-        ss.deleteSheet(sheetDataInput);
+    if (ss.getSheetByName(sheetname)) {
+        ss.deleteSheet(ss.getSheetByName(sheetname));
     }
-    ss.insertSheet('Input');
-    sheetDataInput = ss.getSheetByName('Input');
-
-    // Clear and initialize the Day 1 Puzzle 1 worksheet
-    if (sheetD1P1) {
-        ss.deleteSheet(sheetD1P1);
-    }
-    ss.insertSheet('D1P1');
-    sheetD1P1 = ss.getSheetByName('D1P1');
-
-    // Clear and initialize the Day 1 Puzzle 2 worksheet
-    if (sheetD1P2) {
-        ss.deleteSheet(sheetD1P2);
-    }
-    ss.insertSheet('D1P2');
-    sheetD1P2 = ss.getSheetByName('D1P2');
+    ss.insertSheet(sheetname);
 
     // Delete the Dummy sheet (if exists)
     if (sheetDummy) {
         ss.deleteSheet(sheetDummy);
     }
 
-    /* Import data into Google Sheet */
-
-    convert_txt_gsheets('AoC2023_D1P1.txt', 'Input');
-
 };
-
-/* Helper Functions */
 
 //  Helper Function to Convert Word Values to Traditional Values 
 function word_values_to_numbers(wordvalue, numbervalue){
