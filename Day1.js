@@ -5,46 +5,15 @@ var sheetDataInput = ss.getSheetByName('Input');
 var sheetD1P1 = ss.getSheetByName('D1P1');
 var sheetD1P2 = ss.getSheetByName('D1P2');
 
+function Day1SolveAll () {
+    SetupWorksheets();
+    Day1Puzzle1();
+}
 
-function Day1Puzzle() {
-    /* Setup Google Sheets document with clean worksheets */
 
-    // Create Dummy Sheet            -- Prevents GAS from throwing cannot delete all sheets error
-    var sheets = ss.getSheets();
-    if (sheets.length == 1) {
-        ss.insertSheet('Dummy');
-    }
-    sheetDummy = ss.getSheetByName('Dummy');
 
-    // Clear and initialize the data input worksheet
-    if (sheetDataInput) {
-        ss.deleteSheet(sheetDataInput);
-    }
-    ss.insertSheet('Input');
-    sheetDataInput = ss.getSheetByName('Input');
+function Day1Puzzle1() {
 
-    // Clear and initialize the Day 1 Puzzle 1 worksheet
-    if (sheetD1P1) {
-        ss.deleteSheet(sheetD1P1);
-    }
-    ss.insertSheet('D1P1');
-    sheetD1P1 = ss.getSheetByName('D1P1');
-
-    // Clear and initialize the Day 1 Puzzle 2 worksheet
-    if (sheetD1P2) {
-        ss.deleteSheet(sheetD1P2);
-    }
-    ss.insertSheet('D1P2');
-    sheetD1P2 = ss.getSheetByName('D1P2');
-
-    // Delete the Dummy sheet (if exists)
-    if (sheetDummy) {
-        ss.deleteSheet(sheetDummy);
-    }
-
-    /* Import data into Google Sheet */
-
-    convert_txt_gsheets();
 
     /* D1P1:  Find sum of all of the calibration values */
 
@@ -100,6 +69,51 @@ function Day1Puzzle() {
     sheetD1P1.getRange('C2').setValue(totalCalibrationValues);
 };
 
+
+
+/*  Setup Worksheets */
+function SetupWorksheets() {
+
+    /* Setup Google Sheets document with clean worksheets */
+
+    // Create Dummy Sheet            -- Prevents GAS from throwing cannot delete all sheets error
+    var sheets = ss.getSheets();
+    if (sheets.length == 1) {
+        ss.insertSheet('Dummy');
+    }
+    sheetDummy = ss.getSheetByName('Dummy');
+
+    // Clear and initialize the data input worksheet
+    if (sheetDataInput) {
+        ss.deleteSheet(sheetDataInput);
+    }
+    ss.insertSheet('Input');
+    sheetDataInput = ss.getSheetByName('Input');
+
+    // Clear and initialize the Day 1 Puzzle 1 worksheet
+    if (sheetD1P1) {
+        ss.deleteSheet(sheetD1P1);
+    }
+    ss.insertSheet('D1P1');
+    sheetD1P1 = ss.getSheetByName('D1P1');
+
+    // Clear and initialize the Day 1 Puzzle 2 worksheet
+    if (sheetD1P2) {
+        ss.deleteSheet(sheetD1P2);
+    }
+    ss.insertSheet('D1P2');
+    sheetD1P2 = ss.getSheetByName('D1P2');
+
+    // Delete the Dummy sheet (if exists)
+    if (sheetDummy) {
+        ss.deleteSheet(sheetDummy);
+    }
+
+    /* Import data into Google Sheet */
+
+    convert_txt_gsheets();
+
+}
 
 /*  Generalized function to setup new worksheet */
 // TODO 
