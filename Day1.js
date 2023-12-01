@@ -66,8 +66,10 @@ function Day1Puzzle() {
     for (var i = 1; i <= 5; i++) { 
         var currentRow = valuesInputData[i-1];
         Logger.log(currentRow);
-        var regExpFirstDigit = new RegExp("/([0-9]{1}).*", "gm");
-        Logger.log(regExpFirstDigit);
+
+        var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
+        var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
+        Logger.log(FirstDigit);
 
     }
 };
