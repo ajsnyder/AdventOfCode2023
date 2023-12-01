@@ -78,6 +78,10 @@ function Day1Puzzle2()  {
     //          Numbers are written out as words (e.g. 'one', 'two') in some of the rows
     //          These word numbers must be accounted for when determining first and last digit value in each string
 
+    // 0)  Create new copy of input data 
+    convert_txt_gsheets('AoC2023_D1P1.txt', 'D1P2');
+    sheetDataInput = ss.getSheetByName('D1P2');
+
     // 1)  Find and convert all values stated as words to their numerical form.
     var wordvalues = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     var numvalues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -86,6 +90,9 @@ function Day1Puzzle2()  {
         var wordvalue = wordvalues[i-1];
         var numvalue = numvalues[i-1];
         word_values_to_numbers(wordvalue, numvalue);    
+        Logger.log(wordvalue);
+        Logger.log(numvalue);
+
     }
 
     // 2) Find number of rows of input data
@@ -93,15 +100,15 @@ function Day1Puzzle2()  {
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    //Logger.log(valueNumberInputRows);
+    Logger.log(valueNumberInputRows);
 
     // 3)  Find the calibration value in each row of input data and add to grand total calibration value
 
     var totalCalibrationValues = 0;                                              // Reset running total
     //Logger.log(totalCalibrationValues);
 
-    for (var i = 1; i <= valueNumberInputRows; i++) {
-    //for (var i = 1; i <= 5; i++) {                                            // Used for testing
+    //for (var i = 1; i <= valueNumberInputRows; i++) {
+    for (var i = 1; i <= 10; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
         //Logger.log(currentRow);
 
@@ -115,6 +122,8 @@ function Day1Puzzle2()  {
         var LastDigit = regExpLastDigit.exec(currentRow)[1];
         //Logger.log(LastDigit);
 
+        //Logger.log(currentRow + " | " + FirstDigit + " | " + LastDigit);
+
         // 3c)  Create calibration value
         FirstDigit = parseInt(FirstDigit);
         LastDigit = parseInt(LastDigit);
@@ -125,13 +134,15 @@ function Day1Puzzle2()  {
         // 3d)  Add row-level calibration value to grand total of all calibration values
 
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
+        Logger.log(currentRow + " | " + FirstDigit + " | " + LastDigit + " | " + totalCalibrationValues);
+
         //Logger.log(totalCalibrationValues);
     }
 
     // 4)  Output sum of all calibration vales to solution sheet
 
-    sheetD1P2.getRange('B2').setValue('Answer:');
-    sheetD1P2.getRange('C2').setValue(totalCalibrationValues);
+    sheetD1P2.getRange('C2').setValue('Answer:');
+    sheetD1P2.getRange('D2').setValue(totalCalibrationValues);
 
 };
 
@@ -175,7 +186,7 @@ function SetupWorksheets() {
 
     /* Import data into Google Sheet */
 
-    convert_txt_gsheets();
+    convert_txt_gsheets('AoC2023_D1P1.txt', 'Input');
 
 };
 
@@ -188,11 +199,13 @@ function word_values_to_numbers(wordvalue, numbervalue){
 };
 
 // Import data into Google Sheet
-function convert_txt_gsheets(){
-    var file = DriveApp.getFilesByName('AoC2023_D1P1.txt').next();
+function convert_txt_gsheets(filename, sheetname){
+    // var file = DriveApp.getFilesByName('AoC2023_D1P1.txt').next();
+    var file = DriveApp.getFilesByName(filename).next();
     var body = file.getBlob().getDataAsString().split(/\n/);
     var result = body.map( r => r.split(/\t/));
-    ss.getSheetByName('Input').getRange(1,1,result.length,result[0].length).setValues(result);
+    // ss.getSheetByName('Input').getRange(1,1,result.length,result[0].length).setValues(result);
+    ss.getSheetByName(sheetname).getRange(1,1,result.length,result[0].length).setValues(result);
     return;
 };
 
