@@ -62,35 +62,35 @@ function Day1Puzzle() {
 
     // 2)  Find the calibration value in each row of input data and add to grand total calibration value
 
-    var totalCalibrationValues = 0;     // Reset running total
+    var totalCalibrationValues = 0;                                              // Reset running total
     Logger.log(totalCalibrationValues);
 
-    // for (var i = 1; i <= valueNumberInputRows; i++) {
-    for (var i = 1; i <= 5; i++) { 
+    for (var i = 1; i <= valueNumberInputRows; i++) {
+    //for (var i = 1; i <= 5; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
-        Logger.log(currentRow);
+        //Logger.log(currentRow);
 
         // 2a)  Find the tens digit
         var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
         var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
-        Logger.log(FirstDigit);
+        //Logger.log(FirstDigit);
 
         // 2b)  Find the ones digit
         var regExpLastDigit = new RegExp('.*([0-9]{1})', 'gmi');
         var LastDigit = regExpLastDigit.exec(currentRow)[1];
-        Logger.log(LastDigit);
+        //Logger.log(LastDigit);
 
         // 2c)  Create calibration value
         FirstDigit = parseInt(FirstDigit);
         LastDigit = parseInt(LastDigit);
         
         var rowCalibrationValue = 10 * FirstDigit + LastDigit
-        Logger.log(rowCalibrationValue);
+        //Logger.log(rowCalibrationValue);
 
         // 2d)  Add row-level calibration value to grand total of all calibration values
 
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
-        Logger.log(totalCalibrationValues);
+        //Logger.log(totalCalibrationValues);
 
     }
 
@@ -98,8 +98,6 @@ function Day1Puzzle() {
 
     sheetD1P1.getRange('B2').setValue('Answer:');
     sheetD1P1.getRange('C2').setValue(totalCalibrationValues);
-
-
 };
 
 
