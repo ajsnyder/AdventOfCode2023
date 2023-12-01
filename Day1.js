@@ -7,9 +7,8 @@ var sheetD1P2 = ss.getSheetByName('D1P2');
 
 function Day1SolveAll () {
     SetupWorksheets();
-    // Day1Puzzle1();
+    Day1Puzzle1();
     Day1Puzzle2();
-
 };
 
 /*  Day 1, Puzzle 1 */
@@ -27,12 +26,12 @@ function Day1Puzzle1() {
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    Logger.log(valueNumberInputRows);
+    //Logger.log(valueNumberInputRows);
 
     // 2)  Find the calibration value in each row of input data and add to grand total calibration value
 
     var totalCalibrationValues = 0;                                              // Reset running total
-    Logger.log(totalCalibrationValues);
+    //Logger.log(totalCalibrationValues);
 
     for (var i = 1; i <= valueNumberInputRows; i++) {
     //for (var i = 1; i <= 5; i++) {                                            // Used for testing
@@ -83,35 +82,28 @@ function Day1Puzzle2()  {
     var wordvalues = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     var numvalues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    for (var i = 9; i <= wordvalues.length; i++) {
+    for (var i = 1; i <= wordvalues.length; i++) {
         var wordvalue = wordvalues[i-1];
         var numvalue = numvalues[i-1];
-
-        Logger.log(wordvalue);
-        Logger.log(numvalue);
-    
-        word_values_to_numbers(wordvalue, numvalue);
+        word_values_to_numbers(wordvalue, numvalue);    
     }
 
-    //word_values_to_numbers('nine', '9');
-
     // 2) Find number of rows of input data
-
     var rangeInputData = sheetDataInput.getDataRange();
     var lastrowInputData = rangeInputData.getLastRow();
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
     var valueNumberInputRows = valuesInputData.length;
-    Logger.log(valueNumberInputRows);
+    //Logger.log(valueNumberInputRows);
 
     // 3)  Find the calibration value in each row of input data and add to grand total calibration value
 
     var totalCalibrationValues = 0;                                              // Reset running total
-    Logger.log(totalCalibrationValues);
+    //Logger.log(totalCalibrationValues);
 
-    //for (var i = 1; i <= valueNumberInputRows; i++) {
-    for (var i = 1; i <= 5; i++) {                                            // Used for testing
+    for (var i = 1; i <= valueNumberInputRows; i++) {
+    //for (var i = 1; i <= 5; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
-        Logger.log(currentRow);
+        //Logger.log(currentRow);
 
         // 3a)  Find the tens digit
         var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
@@ -134,7 +126,6 @@ function Day1Puzzle2()  {
 
         totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
         //Logger.log(totalCalibrationValues);
-
     }
 
     // 4)  Output sum of all calibration vales to solution sheet
@@ -188,7 +179,6 @@ function SetupWorksheets() {
 
 };
 
-
 /* Helper Functions */
 
 //  Helper Function to Convert Word Values to Traditional Values 
@@ -196,7 +186,6 @@ function word_values_to_numbers(wordvalue, numbervalue){
     var textFinder = sheetDataInput.createTextFinder(wordvalue);
     textFinder.replaceAllWith(numbervalue);
 };
-
 
 // Import data into Google Sheet
 function convert_txt_gsheets(){
