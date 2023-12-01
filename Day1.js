@@ -60,7 +60,10 @@ function Day1Puzzle() {
     var valueNumberInputRows = valuesInputData.length;
     Logger.log(valueNumberInputRows);
 
-    // 2)  Find the calibration value in each row of input data
+    // 2)  Find the calibration value in each row of input data and add to grand total calibration value
+
+    var totalCalibrationValues = 0;     // Reset running total
+    Logger.log(totalCalibrationValues);
 
     // for (var i = 1; i <= valueNumberInputRows; i++) {
     for (var i = 1; i <= 5; i++) { 
@@ -84,7 +87,19 @@ function Day1Puzzle() {
         var rowCalibrationValue = 10 * FirstDigit + LastDigit
         Logger.log(rowCalibrationValue);
 
+        // 2d)  Add row-level calibration value to grand total of all calibration values
+
+        totalCalibrationValues = totalCalibrationValues + rowCalibrationValue;
+        Logger.log(totalCalibrationValues);
+
     }
+
+    // 3)  Output sum of all calibration vales to solution sheet
+
+    sheetD1P1.getRange('B2').setValue('Answer:');
+    sheetD1P1.getRange('C2').setValue(totalCalibrationValues);
+
+
 };
 
 
