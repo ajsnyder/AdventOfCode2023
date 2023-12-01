@@ -56,10 +56,26 @@ function Day1Puzzle() {
 
     var rangeInputData = sheetDataInput.getDataRange();
     var lastrowInputData = rangeInputData.getLastRow();
-    var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1);
+    var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1).getValues();
+    var valueNumberInputRows = valuesInputData.length;
+    Logger.log(valueNumberInputRows);
 
-    Logger.log(valuesInputData.getValues().length);
+    // 2)  Find first numeric value in each row of input data
+
+    // for (var i = 1; i <= valueNumberInputRows; i++) {
+    for (var i = 1; i <= 5; i++) { 
+        var currentRow = valuesInputData[i-1];
+        Logger.log(currentRow);
+        var regExpFirstDigit = new RegExp("/([0-9]{1}).*", "gm");
+        Logger.log(regExpFirstDigit);
+
+    }
 };
+
+
+/*  Generalized function to setup new worksheet */
+// TODO 
+
 
 /* Import data into Google Sheet */
 
