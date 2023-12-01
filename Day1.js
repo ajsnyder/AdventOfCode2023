@@ -14,31 +14,33 @@ function Day1Puzzle() {
     if (sheets.length == 1) {
         ss.insertSheet('Dummy');
     }
+    sheetDummy = ss.getSheetByName('Dummy');
 
     // Clear and initialize the data input worksheet
     if (sheetDataInput) {
         ss.deleteSheet(sheetDataInput);
     }
     ss.insertSheet('Input');
-
+    sheetDataInput = ss.getSheetByName('Input');
 
     // Clear and initialize the Day 1 Puzzle 1 worksheet
     if (sheetD1P1) {
         ss.deleteSheet(sheetD1P1);
     }
     ss.insertSheet('D1P1');
+    sheetD1P1 = ss.getSheetByName('D1P1');
 
     // Clear and initialize the Day 1 Puzzle 2 worksheet
     if (sheetD1P2) {
         ss.deleteSheet(sheetD1P2);
     }
     ss.insertSheet('D1P2');
+    sheetD1P2 = ss.getSheetByName('D1P2');
 
     // Delete the Dummy sheet (if exists)
     if (sheetDummy) {
         ss.deleteSheet(sheetDummy);
     }
-
 
     /* Import data into Google Sheet */
 
@@ -50,18 +52,13 @@ function Day1Puzzle() {
     //          Tens digit of calibration value is the first digit value found in string
     //          Ones digit of calibration value is the last digit value found in string
 
-    /*
     // 1) Find number of rows of input data
 
     var rangeInputData = sheetDataInput.getDataRange();
     var lastrowInputData = rangeInputData.getLastRow();
-
-    Logger.log(lastrowInputData);
-
     var valuesInputData = sheetDataInput.getRange(1, 1, lastrowInputData, 1);
 
-    Logger.log(valuesInputData.length);
-    */
+    Logger.log(valuesInputData.getValues().length);
 };
 
 /* Import data into Google Sheet */
