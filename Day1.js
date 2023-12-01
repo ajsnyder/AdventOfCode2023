@@ -60,16 +60,24 @@ function Day1Puzzle() {
     var valueNumberInputRows = valuesInputData.length;
     Logger.log(valueNumberInputRows);
 
-    // 2)  Find first numeric value in each row of input data
+    // 2)  Find the calibration value in each row of input data
 
     // for (var i = 1; i <= valueNumberInputRows; i++) {
     for (var i = 1; i <= 5; i++) { 
         var currentRow = valuesInputData[i-1];
         Logger.log(currentRow);
 
+        // 2a)  Find the tens digit
         var regExpFirstDigit = new RegExp('([0-9]{1}).*', 'gmi');
         var FirstDigit = regExpFirstDigit.exec(currentRow)[1];
         Logger.log(FirstDigit);
+
+        // 2b)  Find the ones digit
+        var regExpLastDigit = new RegExp('.*([0-9]{1})', 'gmi');
+        var LastDigit = regExpLastDigit.exec(currentRow)[1];
+        Logger.log(LastDigit);
+
+
 
     }
 };
