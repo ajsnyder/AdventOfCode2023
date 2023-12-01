@@ -77,7 +77,12 @@ function Day1Puzzle() {
         var LastDigit = regExpLastDigit.exec(currentRow)[1];
         Logger.log(LastDigit);
 
-
+        // 2c)  Create calibration value
+        FirstDigit = parseInt(FirstDigit);
+        LastDigit = parseInt(LastDigit);
+        
+        var rowCalibrationValue = 10 * FirstDigit + LastDigit
+        Logger.log(rowCalibrationValue);
 
     }
 };
