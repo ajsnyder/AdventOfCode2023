@@ -83,15 +83,19 @@ function Day1Puzzle2()  {
     sheetDataInput = ss.getSheetByName('D1P2');
 
     // 1)  Find and convert all values stated as words to their numerical form.
-    var wordvalues = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-    var numvalues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    //var wordvalues = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    //var numvalues = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    // 1a)  Testing new "blended" word values, searching from left side only
+    var wordvalues = ['eighthree', 'eightwo', 'fiveight', 'nineight', 'oneight', 'sevenine', 'threeight', 'twone', 'nine', 'eight', 'seven', 'six', 'five', 'four', 'three', 'two', 'one'];
+    var numvalues = ['8', '8', '5', '9', '1', '7', '3', '2', '9', '8', '7', '6', '5', '4', '3', '2', '1'];
 
     for (var i = 1; i <= wordvalues.length; i++) {
         var wordvalue = wordvalues[i-1];
         var numvalue = numvalues[i-1];
         word_values_to_numbers(wordvalue, numvalue);    
-        Logger.log(wordvalue);
-        Logger.log(numvalue);
+        //Logger.log(wordvalue);
+        //Logger.log(numvalue);
 
     }
 
@@ -107,8 +111,8 @@ function Day1Puzzle2()  {
     var totalCalibrationValues = 0;                                              // Reset running total
     //Logger.log(totalCalibrationValues);
 
-    //for (var i = 1; i <= valueNumberInputRows; i++) {
-    for (var i = 1; i <= 10; i++) {                                            // Used for testing
+    for (var i = 1; i <= valueNumberInputRows; i++) {
+    //for (var i = 1; i <= 10; i++) {                                            // Used for testing
         var currentRow = valuesInputData[i-1];
         //Logger.log(currentRow);
 
