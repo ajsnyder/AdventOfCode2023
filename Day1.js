@@ -47,3 +47,12 @@ function convert_txt_gsheets(){
     ss.getSheetByName('Input').getRange(1,1,result.length,result[0].length).setValues(result);
     return;
   }
+
+/* D1P1:  Find sum of all of the calibration values */
+
+// Note:    Calibration value for each row is two-digit value
+//          Tens digit of calibration value is the first digit value found in string
+//          Ones digit of calibration value is the last digit value found in string
+
+
+
