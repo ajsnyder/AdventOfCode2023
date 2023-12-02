@@ -3,16 +3,16 @@
 /*  Global Variables    */
 var ss = SpreadsheetApp.getActive();
 var sheetDummy = ss.getSheetByName('Dummy');
-var sheetDataInput = ss.getSheetByName('Input');
+var sheetDataInput = ss.getSheetByName('D1Input');
 var sheetD1P1 = ss.getSheetByName('D1P1');
 var sheetD1P2 = ss.getSheetByName('D1P2');
 
 function Day1SolveAll () {
-    SetupWorksheets('Input');
+    SetupWorksheets('D1Input');
     SetupWorksheets('D1P1');
     SetupWorksheets('D1P2');
 
-    sheetDataInput = ss.getSheetByName('Input');
+    sheetDataInput = ss.getSheetByName('D1Input');
     sheetD1P1 = ss.getSheetByName('D1P1');
     sheetD1P2 = ss.getSheetByName('D1P2');
 
@@ -30,7 +30,7 @@ function Day1Puzzle1() {
     //          Ones digit of calibration value is the last digit value found in string
 
     // 0) Import data into Google Sheet
-    convert_txt_gsheets('AoC2023_D1P1.txt', 'Input');
+    convert_txt_gsheets('AoC2023_D1P1.txt', 'D1Input');
 
     // 1) Find number of rows of input data
     var rangeInputData = sheetDataInput.getDataRange();
